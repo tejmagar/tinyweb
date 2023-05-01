@@ -30,7 +30,7 @@ dependencies {
 ```
 dependencies {
     implementation 'com.github.tejmagar:tinyweb:1.0.0'
-    implementation 'org.nanohttpd:nanohttpd:2.3.1'
+    implementation 'org.nanohttpd:nanohttpd-websocket:2.3.1'
 }
 ```
 
