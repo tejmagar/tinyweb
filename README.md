@@ -120,6 +120,12 @@ wsRoutes.addRoute(new Path("/ws/", new MyWsView()));
 TinyWebWS tinyWeb = new TinyWebWS(8000);
 tinyWeb.setRoutes(routes);
 tinyWeb.setWsRoutes(wsRoutes);
+
+try {
+    tinyWeb.start();
+} catch (IOException e) {
+    throw new RuntimeException(e);
+}
 ```
 
 ## Tips
