@@ -109,7 +109,7 @@ public class MyWsView extends WsView {
 
 ```
 
-### Create a Server
+### Use TinyWebWs class for Web Server
 ```
 Routes routes = new Routes();
 routes.addRoute(new Path("/", new HomeView()));
