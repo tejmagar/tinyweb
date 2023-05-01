@@ -64,11 +64,10 @@ try {
 ```
 
 ## Creating a server with WebSocket 
-```
 
 ### Creating a WsView
-```
 
+```
 import org.tinyweb.views.WsView;
 import org.tinyweb.websocket.TinyWebSocket;
 
