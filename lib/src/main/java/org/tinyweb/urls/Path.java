@@ -1,9 +1,9 @@
 package org.tinyweb.urls;
 
-import org.tinyweb.views.View;
+import org.tinyweb.views.BaseView;
 
 public class Path extends BasePath {
-    public Path(String path, View view) {
+    public Path(String path, BaseView view) {
         super(path, view);
     }
 

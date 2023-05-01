@@ -16,6 +16,17 @@ allprojects {
 ```
 
 ## Install gradle dependencies
+
+### Without WebSocket
+```
+dependencies {
+    implementation 'com.github.tejmagar:tinyweb:1.0.0'
+    implementation 'org.nanohttpd:nanohttpd:2.3.1'
+}
+```
+
+### With WebSocket
+
 ```
 dependencies {
     implementation 'com.github.tejmagar:tinyweb:1.0.0'
@@ -36,7 +47,7 @@ public class HomeView extends View {
         return NanoHTTPD.newFixedLengthResponse("Hello World");
     }
 }
-```
+
 
 ## Creating a server
 ```        
@@ -52,5 +63,68 @@ try {
 }
 ```
 
+## Creating a server with WebSocket 
+```
+
+### Creating a WsView
+```
+
+import org.tinyweb.views.WsView;
+import org.tinyweb.websocket.TinyWebSocket;
+
+import java.io.IOException;
+
+import fi.iki.elonen.NanoHTTPD;
+import fi.iki.elonen.NanoWSD;
+
+public class MyWsView extends WsView {
+
+    @Override
+    public NanoWSD.WebSocket webSocket(NanoHTTPD.IHTTPSession request) {
+        return new MyTinyWebSocket(request);
+    }
+
+    static class MyTinyWebSocket extends TinyWebSocket {
+
+        public MyTinyWebSocket(NanoHTTPD.IHTTPSession handshakeRequest) {
+            super(handshakeRequest);
+        }
+
+        @Override
+        protected void onOpen() {
+            super.onOpen();
+            try {
+                send("Connected");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        @Override
+        protected void onMessage(NanoWSD.WebSocketFrame messageFrame) {
+            super.onMessage(messageFrame);
+            System.out.println(messageFrame.getTextPayload());
+        }
+    }
+}
+
+```
+
+### Create a Server
+```
+Routes routes = new Routes();
+routes.addRoute(new Path("/", new HomeView()));
+
+Routes wsRoutes = new Routes();
+wsRoutes.addRoute(new Path("/ws/", new MyWsView()));
+
+TinyWebWS tinyWeb = new TinyWebWS(8000);
+tinyWeb.setRoutes(routes);
+tinyWeb.setWsRoutes(wsRoutes);
+```
+
 ## Tips
 Running server in foreground service helps to serve pages in background even after closing app.
+
+
+## Web

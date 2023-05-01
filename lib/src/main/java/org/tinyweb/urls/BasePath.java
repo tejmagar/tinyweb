@@ -1,12 +1,12 @@
 package org.tinyweb.urls;
 
-import org.tinyweb.views.View;
+import org.tinyweb.views.BaseView;
 
 public abstract class BasePath {
     private final String path;
-    private final View view;
+    private final BaseView view;
 
-    public BasePath(String path, View view) {
+    public BasePath(String path, BaseView view) {
         this.path = path;
         this.view = view;
     }
@@ -15,7 +15,7 @@ public abstract class BasePath {
         return path;
     }
 
-    public View getView() {
+    public BaseView getView() {
         return view;
     }
 

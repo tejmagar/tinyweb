@@ -1,4 +1,4 @@
-package org.tinyweb;
+package org.tinyweb.demo;
 
 import org.junit.Test;
 
