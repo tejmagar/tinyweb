@@ -47,7 +47,7 @@ public class HomeView extends View {
         return NanoHTTPD.newFixedLengthResponse("Hello World");
     }
 }
-
+```
 
 ## Creating a server
 ```        
