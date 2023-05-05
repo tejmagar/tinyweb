@@ -130,6 +130,3 @@ try {
 
 ## Tips
 Running server in foreground service helps to serve pages in background even after closing app.
-
-
-## Web
