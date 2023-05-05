@@ -38,6 +38,6 @@ public class HttpHandler {
             }
         }
 
-        return null;
+        return NanoHTTPD.newFixedLengthResponse("404 Page not found");
     }
 }
