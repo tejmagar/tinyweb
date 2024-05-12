@@ -36,7 +36,7 @@ dependencies {
 
 ## Creating a View
 
-```
+```java
 import org.tinyweb.views.View;
 import fi.iki.elonen.NanoHTTPD;
 
@@ -50,7 +50,7 @@ public class HomeView extends View {
 ```
 
 ## Creating a server
-```        
+```java        
 TinyWeb tinyWeb = new TinyWeb(8000);
 Routes routes = new Routes();
 routes.addRoute(new Path("/", new HomeView()));
@@ -67,7 +67,7 @@ try {
 
 ### Creating a WsView
 
-```
+```java
 import org.tinyweb.views.WsView;
 import org.tinyweb.websocket.TinyWebSocket;
 
@@ -110,7 +110,7 @@ public class MyWsView extends WsView {
 ```
 
 ### Use TinyWebWs class for Web Server
-```
+```java
 Routes routes = new Routes();
 routes.addRoute(new Path("/", new HomeView()));
 
