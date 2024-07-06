@@ -1,7 +1,6 @@
 # TinyWeb
-TinyWeb is a simple Android library based on NanoHTTPD. This library handles routing and middlewares
-features.
 
+TinyWeb is a simple http server library for Android.
 
 ## Add jitpack in repositories
 
@@ -17,115 +16,55 @@ allprojects {
 
 ## Install gradle dependencies
 
-### Without WebSocket
 ```gradle
 dependencies {
-    implementation 'com.github.tejmagar:tinyweb:1.0.0'
-    implementation 'org.nanohttpd:nanohttpd:2.3.1'
-}
-```
-
-### With WebSocket
-
-```gradle
-dependencies {
-    implementation 'com.github.tejmagar:tinyweb:1.0.0'
-    implementation 'org.nanohttpd:nanohttpd-websocket:2.3.1'
+    implementation 'com.github.tejmagar:tinyweb:1.0.1-alpha'
 }
 ```
 
 ## Creating a View
 
-```java
+Create public class for each route.
+Note: if the class is not public, the server may not behave as expected.
+
+```java        
+import androidx.annotation.NonNull;
+
+import org.tinyweb.request.Request;
+import org.tinyweb.response.HttpResponse;
+import org.tinyweb.response.Response;
 import org.tinyweb.views.View;
-import fi.iki.elonen.NanoHTTPD;
 
 public class HomeView extends View {
-
+    @NonNull
     @Override
-    public NanoHTTPD.Response getResponse(NanoHTTPD.IHTTPSession request) {
-        return NanoHTTPD.newFixedLengthResponse("Hello World");
+    public Response response(Request request) {
+        return new HttpResponse("Hello World");
     }
 }
 ```
 
-## Creating a server
-```java        
-TinyWeb tinyWeb = new TinyWeb(8000);
-Routes routes = new Routes();
-routes.addRoute(new Path("/", new HomeView()));
-tinyWeb.setRoutes(routes);
-
-try {
-    tinyWeb.start();
-} catch (IOException e) {
-    throw new RuntimeException(e);
-}
-```
-
-## Creating a server with WebSocket 
-
-### Creating a WsView
-
+## Creating a server instance
 ```java
-import org.tinyweb.views.WsView;
-import org.tinyweb.websocket.TinyWebSocket;
+    // Other imports...
 
-import java.io.IOException;
+    import org.tinyweb.Server;
+    import org.tinyweb.TinyWebLogging;
+    import org.tinyweb.paths.Path;
 
-import fi.iki.elonen.NanoHTTPD;
-import fi.iki.elonen.NanoWSD;
-
-public class MyWsView extends WsView {
-
-    @Override
-    public NanoWSD.WebSocket webSocket(NanoHTTPD.IHTTPSession request) {
-        return new MyTinyWebSocket(request);
-    }
-
-    static class MyTinyWebSocket extends TinyWebSocket {
-
-        public MyTinyWebSocket(NanoHTTPD.IHTTPSession handshakeRequest) {
-            super(handshakeRequest);
-        }
-
+    public class MainActivity extends AppCompatActivity {
         @Override
-        protected void onOpen() {
-            super.onOpen();
-            try {
-                send("Connected");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
 
-        @Override
-        protected void onMessage(NanoWSD.WebSocketFrame messageFrame) {
-            super.onMessage(messageFrame);
-            System.out.println(messageFrame.getTextPayload());
+            // To see logs
+            // TinyWebLogging.enableLogging = true;
+            Server server = new Server(8080);
+            server.addRoute(new Path("/", Home.class));
+            server.run();
         }
     }
-}
-
-```
-
-### Use TinyWebWs class for Web Server
-```java
-Routes routes = new Routes();
-routes.addRoute(new Path("/", new HomeView()));
-
-Routes wsRoutes = new Routes();
-wsRoutes.addRoute(new Path("/ws/", new MyWsView()));
-
-TinyWebWS tinyWeb = new TinyWebWS(8000);
-tinyWeb.setRoutes(routes);
-tinyWeb.setWsRoutes(wsRoutes);
-
-try {
-    tinyWeb.start();
-} catch (IOException e) {
-    throw new RuntimeException(e);
-}
 ```
 
 ## Tips
