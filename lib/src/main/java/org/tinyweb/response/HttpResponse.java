@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 public class HttpResponse extends Response {
     private final Headers headers = new Headers();
     private final String text;
+    private boolean serveDefault = true;
 
     private final StatusUtil.ResponseStatus responseStatus;
 
@@ -44,7 +45,12 @@ public class HttpResponse extends Response {
 
     @Override
     public boolean serveDefault() {
-        return true;
+        return serveDefault;
+    }
+
+    @Override
+    public void disableServeDefault() {
+        serveDefault = false;
     }
 
     @Override
