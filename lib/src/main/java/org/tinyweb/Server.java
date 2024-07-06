@@ -25,7 +25,7 @@ public class Server {
     private boolean isRunning = true;
     private int bufferSize = 8096;
 
-    private List<Path> paths = new ArrayList<>();
+    private final List<Path> paths = new ArrayList<>();
     private Router router = null;
     private Wrap wrap;
 
