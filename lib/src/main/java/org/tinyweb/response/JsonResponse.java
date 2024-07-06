@@ -8,19 +8,19 @@ import org.tinyweb.response.status.StatusUtil;
 
 import java.nio.charset.StandardCharsets;
 
-public class HttpResponse extends Response {
+public class JsonResponse extends Response {
     private final Headers headers = new Headers();
     private final String text;
 
     private final StatusUtil.ResponseStatus responseStatus;
 
-    public HttpResponse(String text) {
+    public JsonResponse(String text) {
         this.responseStatus = StatusUtil.fromStatus(Status.Ok);
         this.text = text;
         initHeaders();
     }
 
-    public HttpResponse(Status status, String text) {
+    public JsonResponse(Status status, String text) {
         this.responseStatus = StatusUtil.fromStatus(status);
         this.text = text;
         initHeaders();
@@ -28,7 +28,7 @@ public class HttpResponse extends Response {
 
     private void initHeaders() {
         headers.set("Content-Length", String.valueOf(text.length()));
-        headers.set("Content-Type", "text/html");
+        headers.set("Content-Type", "application/json");
     }
 
     @Override
