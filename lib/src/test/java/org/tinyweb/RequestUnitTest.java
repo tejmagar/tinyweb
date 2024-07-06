@@ -1,10 +1,10 @@
-package org.tinyweb.lib;
+package org.tinyweb;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import org.tinyweb.lib.request.RequestParser;
+import org.tinyweb.request.RequestParser;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

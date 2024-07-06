@@ -1,4 +1,4 @@
-package org.tinyweb.lib.commons;
+package org.tinyweb.commons;
 
 import java.util.List;
 

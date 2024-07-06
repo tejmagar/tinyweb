@@ -1,10 +1,10 @@
-package org.tinyweb.lib.views;
+package org.tinyweb.views;
 
 import androidx.annotation.Nullable;
 
-import org.tinyweb.lib.paths.Path;
-import org.tinyweb.lib.request.Request;
-import org.tinyweb.lib.response.Response;
+import org.tinyweb.paths.Path;
+import org.tinyweb.request.Request;
+import org.tinyweb.response.Response;
 
 public interface Wrap {
     Response wrap(Request request, @Nullable  Class<? extends View> view);

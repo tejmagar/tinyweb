@@ -1,6 +1,6 @@
-package org.tinyweb.lib.commons;
+package org.tinyweb.commons;
 
-import org.tinyweb.lib.TinyWebLogging;
+import org.tinyweb.TinyWebLogging;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

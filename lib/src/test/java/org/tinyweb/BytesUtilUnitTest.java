@@ -1,8 +1,8 @@
-package org.tinyweb.lib;
+package org.tinyweb;
 
 import static junit.framework.TestCase.assertEquals;
 
-import org.tinyweb.lib.commons.ByteUtil;
+import org.tinyweb.commons.ByteUtil;
 
 import org.junit.Test;
 

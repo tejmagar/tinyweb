@@ -1,12 +1,12 @@
-package org.tinyweb.lib;
+package org.tinyweb;
 
 import static junit.framework.TestCase.assertEquals;
 
-import org.tinyweb.lib.forms.Files;
-import org.tinyweb.lib.headers.Headers;
-import org.tinyweb.lib.parsers.MultipartParser;
-import org.tinyweb.lib.stream.Stream;
-import org.tinyweb.lib.stream.TestStream;
+import org.tinyweb.forms.Files;
+import org.tinyweb.headers.Headers;
+import org.tinyweb.parsers.MultipartParser;
+import org.tinyweb.stream.Stream;
+import org.tinyweb.stream.TestStream;
 
 import org.junit.Test;
 

@@ -1,14 +1,14 @@
-package org.tinyweb.lib.parsers;
+package org.tinyweb.parsers;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.tinyweb.lib.commons.ByteUtil;
-import org.tinyweb.lib.forms.Files;
-import org.tinyweb.lib.forms.FormData;
-import org.tinyweb.lib.headers.Headers;
-import org.tinyweb.lib.request.RequestParser;
-import org.tinyweb.lib.stream.Stream;
+import org.tinyweb.commons.ByteUtil;
+import org.tinyweb.forms.Files;
+import org.tinyweb.forms.FormData;
+import org.tinyweb.headers.Headers;
+import org.tinyweb.request.RequestParser;
+import org.tinyweb.stream.Stream;
 
 import java.io.File;
 import java.io.FileOutputStream;

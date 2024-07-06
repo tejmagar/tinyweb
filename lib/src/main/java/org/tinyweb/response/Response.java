@@ -1,9 +1,9 @@
-package org.tinyweb.lib.response;
+package org.tinyweb.response;
 
 import androidx.annotation.NonNull;
 
-import org.tinyweb.lib.headers.Headers;
-import org.tinyweb.lib.response.status.StatusUtil;
+import org.tinyweb.headers.Headers;
+import org.tinyweb.response.status.StatusUtil;
 
 public abstract class Response {
     public abstract StatusUtil.ResponseStatus responseStatus();

@@ -1,4 +1,4 @@
-package org.tinyweb.lib.response.status;
+package org.tinyweb.response.status;
 
 public enum Status {
     Ok,

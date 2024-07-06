@@ -1,4 +1,4 @@
-package org.tinyweb.lib.forms;
+package org.tinyweb.forms;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

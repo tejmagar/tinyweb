@@ -1,8 +1,8 @@
-package org.tinyweb.lib.request;
+package org.tinyweb.request;
 
-import org.tinyweb.lib.paths.PathUtil;
-import org.tinyweb.lib.stream.Stream;
-import org.tinyweb.lib.headers.Headers;
+import org.tinyweb.paths.PathUtil;
+import org.tinyweb.stream.Stream;
+import org.tinyweb.headers.Headers;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;

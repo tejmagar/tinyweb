@@ -1,4 +1,4 @@
-package org.tinyweb.lib;
+package org.tinyweb;
 
 import android.util.Log;
 

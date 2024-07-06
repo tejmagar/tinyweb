@@ -1,18 +1,18 @@
-package org.tinyweb.lib;
+package org.tinyweb;
 
-import org.tinyweb.lib.headers.Headers;
-import org.tinyweb.lib.paths.Path;
-import org.tinyweb.lib.request.Request;
-import org.tinyweb.lib.request.RequestParser;
-import org.tinyweb.lib.response.HttpResponse;
-import org.tinyweb.lib.response.Response;
-import org.tinyweb.lib.response.status.Status;
-import org.tinyweb.lib.response.status.StatusUtil;
-import org.tinyweb.lib.router.Router;
-import org.tinyweb.lib.stream.SocketStream;
-import org.tinyweb.lib.stream.Stream;
-import org.tinyweb.lib.views.View;
-import org.tinyweb.lib.views.Wrap;
+import org.tinyweb.headers.Headers;
+import org.tinyweb.paths.Path;
+import org.tinyweb.request.Request;
+import org.tinyweb.request.RequestParser;
+import org.tinyweb.response.HttpResponse;
+import org.tinyweb.response.Response;
+import org.tinyweb.response.status.Status;
+import org.tinyweb.response.status.StatusUtil;
+import org.tinyweb.router.Router;
+import org.tinyweb.stream.SocketStream;
+import org.tinyweb.stream.Stream;
+import org.tinyweb.views.View;
+import org.tinyweb.views.Wrap;
 
 import java.net.ServerSocket;
 import java.net.Socket;

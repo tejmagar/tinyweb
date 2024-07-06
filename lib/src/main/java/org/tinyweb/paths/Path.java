@@ -1,10 +1,10 @@
-package org.tinyweb.lib.paths;
+package org.tinyweb.paths;
 
 import androidx.annotation.NonNull;
 
-import org.tinyweb.lib.request.Request;
-import org.tinyweb.lib.response.Response;
-import org.tinyweb.lib.views.View;
+import org.tinyweb.request.Request;
+import org.tinyweb.response.Response;
+import org.tinyweb.views.View;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

@@ -1,4 +1,4 @@
-package org.tinyweb.lib.stream;
+package org.tinyweb.stream;
 
 public class TestStream extends Stream{
     private byte[] testBytes;

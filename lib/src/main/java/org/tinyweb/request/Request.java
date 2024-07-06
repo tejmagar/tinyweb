@@ -1,7 +1,7 @@
-package org.tinyweb.lib.request;
+package org.tinyweb.request;
 
-import org.tinyweb.lib.stream.Stream;
-import org.tinyweb.lib.headers.Headers;
+import org.tinyweb.stream.Stream;
+import org.tinyweb.headers.Headers;
 
 import java.util.HashMap;
 import java.util.List;

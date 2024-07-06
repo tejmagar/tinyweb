@@ -1,4 +1,4 @@
-package org.tinyweb.lib.headers;
+package org.tinyweb.headers;
 
 import androidx.annotation.Nullable;
 

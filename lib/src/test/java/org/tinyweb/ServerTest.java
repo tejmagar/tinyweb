@@ -1,14 +1,14 @@
-package org.tinyweb.lib;
+package org.tinyweb;
 
 import androidx.annotation.NonNull;
 
-import org.tinyweb.lib.parsers.MultipartParser;
-import org.tinyweb.lib.paths.Path;
-import org.tinyweb.lib.request.Request;
-import org.tinyweb.lib.response.HttpResponse;
-import org.tinyweb.lib.response.Response;
-import org.tinyweb.lib.stream.Stream;
-import org.tinyweb.lib.views.View;
+import org.tinyweb.parsers.MultipartParser;
+import org.tinyweb.paths.Path;
+import org.tinyweb.request.Request;
+import org.tinyweb.response.HttpResponse;
+import org.tinyweb.response.Response;
+import org.tinyweb.stream.Stream;
+import org.tinyweb.views.View;
 
 import java.io.IOException;
 import java.util.ArrayList;

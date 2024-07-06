@@ -1,4 +1,4 @@
-package org.tinyweb.lib.stream;
+package org.tinyweb.stream;
 
 public abstract class Stream {
     public static class StreamReadException extends Exception {

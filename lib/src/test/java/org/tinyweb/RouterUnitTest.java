@@ -1,15 +1,15 @@
-package org.tinyweb.lib;
+package org.tinyweb;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
 import androidx.annotation.NonNull;
 
-import org.tinyweb.lib.paths.Path;
-import org.tinyweb.lib.request.Request;
-import org.tinyweb.lib.response.Response;
-import org.tinyweb.lib.router.Router;
-import org.tinyweb.lib.views.View;
+import org.tinyweb.paths.Path;
+import org.tinyweb.request.Request;
+import org.tinyweb.response.Response;
+import org.tinyweb.router.Router;
+import org.tinyweb.views.View;
 
 import org.junit.Test;
 

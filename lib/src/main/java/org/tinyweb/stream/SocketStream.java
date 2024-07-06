@@ -1,6 +1,6 @@
-package org.tinyweb.lib.stream;
+package org.tinyweb.stream;
 
-import org.tinyweb.lib.TinyWebLogging;
+import org.tinyweb.TinyWebLogging;
 
 import java.io.IOException;
 import java.io.InputStream;

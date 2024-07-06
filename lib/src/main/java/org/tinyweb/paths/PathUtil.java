@@ -1,7 +1,7 @@
-package org.tinyweb.lib.paths;
+package org.tinyweb.paths;
 
-import org.tinyweb.lib.TinyWebLogging;
-import org.tinyweb.lib.commons.QueryUtil;
+import org.tinyweb.TinyWebLogging;
+import org.tinyweb.commons.QueryUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

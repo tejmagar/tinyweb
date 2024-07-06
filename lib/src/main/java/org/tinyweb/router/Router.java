@@ -1,8 +1,8 @@
-package org.tinyweb.lib.router;
+package org.tinyweb.router;
 
 import androidx.annotation.Nullable;
 
-import org.tinyweb.lib.paths.Path;
+import org.tinyweb.paths.Path;
 
 import java.util.List;
 import java.util.regex.Matcher;
