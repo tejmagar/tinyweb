@@ -2,7 +2,7 @@
 
 TinyWeb is a simple http server library for Android.
 
-## Add jitpack in repositories
+## Update settings.gradle
 
 ```gradle
 allprojects {
