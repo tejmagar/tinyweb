@@ -61,7 +61,7 @@ public class HomeView extends View {
             // To see logs
             // TinyWebLogging.enableLogging = true;
             Server server = new Server(8080);
-            server.addRoute(new Path("/", Home.class));
+            server.addRoute(new Path("/", HomeView.class));
             server.run();
         }
     }
