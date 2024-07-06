@@ -15,7 +15,7 @@ public class HttpResponse extends Response {
     private final StatusUtil.ResponseStatus responseStatus;
 
     public HttpResponse(String text) {
-        this.responseStatus = StatusUtil.fromStatus(Status.Ok);
+        this.responseStatus = StatusUtil.fromStatus(Status.OK);
         this.text = text;
         initHeaders();
     }

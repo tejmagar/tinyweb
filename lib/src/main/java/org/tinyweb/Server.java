@@ -141,7 +141,7 @@ public class Server {
                         response = wrap.wrap(request, view);
                     }
                 } else {
-                    response = new HttpResponse(Status.FILE_NOT_FOUND, "404 NOT FOUND");
+                    response = new HttpResponse(Status.NOT_FOUND, "404 NOT FOUND");
                 }
 
 
