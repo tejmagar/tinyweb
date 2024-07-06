@@ -2,16 +2,30 @@
 
 TinyWeb is a simple http server library for Android.
 
-## Update settings.gradle
+## For settings.gradle
 
 ```gradle
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
 }
+```
 
+## For settings.gradle.kts
+
+```gradle
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://jitpack.io")
+    }
+}
 ```
 
 ## Install gradle dependencies
