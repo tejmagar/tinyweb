@@ -17,6 +17,7 @@ import org.tinyweb.views.Wrap;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Server {
@@ -24,7 +25,8 @@ public class Server {
     private boolean isRunning = true;
     private int bufferSize = 8096;
 
-    private Router router;
+    private List<Path> paths = new ArrayList<>();
+    private Router router = null;
     private Wrap wrap;
 
     public Server(int port) {
@@ -42,6 +44,10 @@ public class Server {
 
     public void setRoutes(List<Path> paths) {
         router = new Router(paths);
+    }
+
+    public void addRoute(Path path) {
+        paths.add(path);
     }
 
     public void wrap(Wrap wrap) {
@@ -64,6 +70,10 @@ public class Server {
     }
 
     public void runBlocking() throws Exception {
+        if (router == null) {
+            router = new Router(paths);
+        }
+
         ServerSocket serverSocket = new ServerSocket(port);
         while (isRunning) {
             Socket socket = serverSocket.accept();
@@ -122,10 +132,7 @@ public class Server {
                     keepAlive = false;
                 }
 
-                Path path = null;
-                if (router != null) {
-                     path = router.match(request.pathName);
-                }
+                Path path = router.match(request.pathName);
 
                 Response response;
                 if (router !=null && path != null) {
