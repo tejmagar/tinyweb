@@ -13,6 +13,8 @@ public abstract class Stream {
         }
     }
 
+    public abstract String remoteAddress();
+
     public abstract int bufferSize();
     public abstract byte[] readChunk() throws StreamReadException;
 

@@ -11,6 +11,11 @@ public class TestStream extends Stream{
     }
 
     @Override
+    public String remoteAddress() {
+        return "";
+    }
+
+    @Override
     public int bufferSize() {
         return bufferSize;
     }

@@ -1,5 +1,7 @@
 package org.tinyweb.stream;
 
+import androidx.annotation.Nullable;
+
 import org.tinyweb.TinyWebLogging;
 
 import java.io.IOException;
@@ -16,6 +18,11 @@ public class SocketStream extends Stream {
     public SocketStream(Socket socket, int bufferSize) {
         this.socket = socket;
         this.bufferSize = bufferSize;
+    }
+
+    @Override
+    public String remoteAddress() {
+        return socket.getRemoteSocketAddress().toString().replaceFirst("/", "");
     }
 
     @Override

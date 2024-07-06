@@ -2,6 +2,7 @@ package org.tinyweb;
 
 import androidx.annotation.NonNull;
 
+import org.junit.Test;
 import org.tinyweb.parsers.MultipartParser;
 import org.tinyweb.paths.Path;
 import org.tinyweb.request.Request;
@@ -20,11 +21,11 @@ public class ServerTest {
 
     public static class Home extends View {
 
-        public Home() {}
-
         @NonNull
         @Override
         public Response response(Request request) {
+            System.out.println(request.stream.remoteAddress());
+
             MultipartParser multipartParser = new MultipartParser(request.headers, request.stream);
             try {
                 MultipartParser.ParseResult parseResult = multipartParser.parse();
