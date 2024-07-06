@@ -1,10 +1,13 @@
 package org.tinyweb.paths;
 
+import android.net.Uri;
+
 import org.tinyweb.TinyWebLogging;
 import org.tinyweb.commons.QueryUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,25 +22,14 @@ public class PathUtil {
 
         int firstQuestionMarkIndex = rawPath.indexOf("?");
         if (firstQuestionMarkIndex == -1) {
-            try {
-                pathParseResult.pathName = URLDecoder.decode(rawPath, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                TinyWebLogging.debug(e);
-                pathParseResult.pathName = rawPath;
-            }
-
+            pathParseResult.pathName = URLDecoder.decode(rawPath);
             pathParseResult.queryParams = new HashMap<>();
             return pathParseResult;
         }
 
         // Skips question mark character
-        String pathName = rawPath.substring(firstQuestionMarkIndex);
-        try {
-            pathParseResult.pathName = URLDecoder.decode(pathName, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            TinyWebLogging.debug(e);
-            pathParseResult.pathName = pathName;
-        }
+        String pathName = rawPath.substring(0, firstQuestionMarkIndex);
+        pathParseResult.pathName = URLDecoder.decode(pathName);
 
         String rawQueryParams = rawPath.substring(firstQuestionMarkIndex + 1);
         pathParseResult.queryParams = QueryUtil.queryParamsFromUrl(rawQueryParams);

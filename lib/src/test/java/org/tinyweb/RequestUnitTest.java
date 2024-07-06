@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import org.tinyweb.paths.PathUtil;
 import org.tinyweb.request.RequestParser;
 
 /**
@@ -14,12 +15,19 @@ import org.tinyweb.request.RequestParser;
 public class RequestUnitTest {
     @Test
     public void testSimpleRequestPath() {
-        String[] headers = new String[]{"GET / HTTP/1.1"};
+        String[] headers = new String[]{"GET /?name=john HTTP/1.1"};
         RequestParser.RequestInfo requestInfo = RequestParser.parseRequestInfo(headers);
         assert requestInfo != null;
         assertEquals("GET", requestInfo.method);
-        assertEquals("/", requestInfo.rawPath);
+        assertEquals("/?name=john", requestInfo.rawPath);
+        assertEquals("/", requestInfo.pathName);
         assertEquals("HTTP/1.1", requestInfo.httpVersion);
+    }
+
+    @Test
+    public void testParsePath() {
+        PathUtil.PathParseResult pathParseResult = PathUtil.parsePath("/?name=1");
+        assertEquals("/", pathParseResult.pathName);
     }
 
     @Test
