@@ -22,14 +22,22 @@ public class PathUtil {
 
         int firstQuestionMarkIndex = rawPath.indexOf("?");
         if (firstQuestionMarkIndex == -1) {
-            pathParseResult.pathName = URLDecoder.decode(rawPath);
+            try {
+                pathParseResult.pathName = URLDecoder.decode(rawPath, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                pathParseResult.pathName = rawPath;
+            }
             pathParseResult.queryParams = new HashMap<>();
             return pathParseResult;
         }
 
         // Skips question mark character
         String pathName = rawPath.substring(0, firstQuestionMarkIndex);
-        pathParseResult.pathName = URLDecoder.decode(pathName);
+        try {
+            pathParseResult.pathName = URLDecoder.decode(pathName, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            pathParseResult.pathName = pathName;
+        }
 
         String rawQueryParams = rawPath.substring(firstQuestionMarkIndex + 1);
         pathParseResult.queryParams = QueryUtil.queryParamsFromUrl(rawQueryParams);

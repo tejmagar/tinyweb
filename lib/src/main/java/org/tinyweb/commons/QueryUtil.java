@@ -24,7 +24,8 @@ public class QueryUtil {
         String[] params = decodedUrl.split("&");
         for (String param : params) {
             String[] keyValue = param.split("=");
-            if (keyValue.length > 2) {
+
+            if (keyValue.length >= 2) {
                 String name = keyValue[0].trim();
                 String value = keyValue[1].trim();
 
