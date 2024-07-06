@@ -1,8 +1,10 @@
-package org.tinyweb.views;
+package org.tinyweb.lib.views;
 
+import androidx.annotation.NonNull;
 
-import org.tinyweb.TinyWeb;
+import org.tinyweb.lib.request.Request;
+import org.tinyweb.lib.response.Response;
 
-public abstract class View extends BaseView {
-    public abstract TinyWeb.Response getResponse(TinyWeb.IHTTPSession request);
+public abstract class View {
+    public abstract @NonNull Response response(Request request);
 }
