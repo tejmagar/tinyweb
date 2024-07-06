@@ -18,7 +18,7 @@ allprojects {
 
 ```gradle
 dependencies {
-    implementation 'com.github.tejmagar:tinyweb:1.0.1-alpha'
+    implementation 'com.github.tejmagar:tinyweb:v1.0.1-alpha'
 }
 ```
 
