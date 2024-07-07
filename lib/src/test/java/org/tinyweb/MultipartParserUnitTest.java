@@ -49,9 +49,12 @@ public class MultipartParserUnitTest {
 
         Stream stream = new TestStream(testBytes, 1024);
         Headers headers = new Headers();
+        headers.set("Content-Length", String.valueOf(testBytes.length));
         headers.set("Content-Type",
                 "multipart/form-data; boundary=--------------------------601387312303539837588086");
-        MultipartParser multipartParser = new MultipartParser(headers, stream);
+        MultipartParser multipartParser = new MultipartParser(headers, stream, (readBytes, totalBytes) -> {
+            System.out.println("Read: " + readBytes + '/' + totalBytes);
+        });
 
         try {
             MultipartParser.ParseResult parseResult = multipartParser.parse();

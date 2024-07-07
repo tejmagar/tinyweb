@@ -3,6 +3,7 @@ package org.tinyweb.parsers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.tinyweb.TinyWebLogging;
 import org.tinyweb.commons.ByteUtil;
 import org.tinyweb.forms.Files;
 import org.tinyweb.forms.FormData;
@@ -22,9 +23,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MultipartParser {
+    public interface OnProgressListener {
+        void onUpdate(long readBytes, long totalBytes);
+    }
+
     private final Headers headers;
     private final Stream stream;
     private String boundary;
+
+    private OnProgressListener onProgressListener = null;
+    private long bytesRead = 0;
+    private long totalBytes = -1;
 
     public static class FormPartHeader {
         public String name;
@@ -57,6 +66,12 @@ public class MultipartParser {
         this.stream = stream;
     }
 
+    public MultipartParser(Headers headers, Stream stream, OnProgressListener onProgressListener) {
+        this.headers = headers;
+        this.stream = stream;
+        this.onProgressListener = onProgressListener;
+    }
+
     public ParseResult parse() throws MultipartParseException,
             Stream.StreamReadException, IOException {
         String contentType = headers.value("content-type");
@@ -67,6 +82,15 @@ public class MultipartParser {
         if (!contentType.toLowerCase().startsWith("multipart/form-data;")) {
             throw new MultipartParseException("Invalid content type for multipart. Found: "
                     + contentType);
+        }
+
+        String contentLength = headers.value("content-length");
+        if (contentLength != null) {
+            try {
+                totalBytes = Long.parseLong(contentLength);
+            } catch (NumberFormatException e) {
+                TinyWebLogging.error(e);
+            }
         }
 
         boundary = getMultipartBoundary(contentType);
@@ -90,6 +114,11 @@ public class MultipartParser {
             for (byte b : bytes) {
                 buffer.add(b);
             }
+
+            bytesRead += bytes.length;
+            if (onProgressListener != null) {
+                onProgressListener.onUpdate(bytesRead, totalBytes);
+            }
         }
 
         byte[] matchedBytes = ByteUtil.slice(buffer, 0, scanBoundary.length());
@@ -99,6 +128,7 @@ public class MultipartParser {
 
         byte[] remainingBytes = ByteUtil.slice(buffer, scanBoundary.length());
         stream.restoreChunk(remainingBytes);
+        bytesRead -= remainingBytes.length;
 
         ParseResult parseResult = new ParseResult();
         parseResult.formData = new FormData();
@@ -133,11 +163,17 @@ public class MultipartParser {
         while ((matchedIndex = RequestParser.scanHeaderEnd(buffer)) == -1) {
             byte[] chunk = stream.readChunk();
             ByteUtil.extendSlice(buffer, chunk);
+
+            bytesRead += chunk.length;
+            if (onProgressListener != null) {
+                onProgressListener.onUpdate(bytesRead, totalBytes);
+            }
         }
 
         byte[] headers = ByteUtil.slice(buffer, 0, matchedIndex + 1);
         byte[] misRead = ByteUtil.slice(buffer, matchedIndex + 1 + "\r\n\r\n".length());
         stream.restoreChunk(misRead);
+        bytesRead -= misRead.length;
 
         String headerString = new String(headers);
         String[] headerLines = headerString.split("\r\n");
@@ -177,7 +213,13 @@ public class MultipartParser {
 
         while (((matchedIndex = ByteUtil.scan(buffer, scanBoundaryBytes)) == -1)
                 && buffer.size() < matchedIndex + "--\r\n".length()) {
-            ByteUtil.extendSlice(buffer, stream.readChunk());
+            byte[] bytes = stream.readChunk();
+            ByteUtil.extendSlice(buffer, bytes);
+
+            bytesRead += bytes.length;
+            if (onProgressListener != null) {
+                onProgressListener.onUpdate(bytesRead, totalBytes);
+            }
         }
 
         // Matched index is equal to the length since it returns beginning index where match starts.
@@ -196,6 +238,7 @@ public class MultipartParser {
         // Skips scan boundary
         byte[] restoredBytes = ByteUtil.slice(buffer, skipOffset);
         stream.restoreChunk(restoredBytes);
+        bytesRead -= restoredBytes.length;
 
         ValueParseResult valueParseResult = new ValueParseResult();
         valueParseResult.hasNext = !isFinal;
@@ -256,7 +299,14 @@ public class MultipartParser {
                     ByteUtil.extendSlice(buffer, remainingToMatch);
                 }
 
-                ByteUtil.extendSlice(buffer, stream.readChunk());
+                byte[] bytes = stream.readChunk();
+                bytesRead += bytes.length;
+
+                if (onProgressListener != null) {
+                    onProgressListener.onUpdate(bytesRead, totalBytes);
+                }
+
+                ByteUtil.extendSlice(buffer, bytes);
             }
         }
 
